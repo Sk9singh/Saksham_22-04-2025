@@ -19,7 +19,7 @@ def trigger_report(background_tasks: BackgroundTasks, db: Session = Depends(get_
     """
     report_id = str(uuid.uuid4())
     
-    # Create a new report record
+    
     new_report = Report(
         report_id=report_id,
         status="running",

@@ -33,9 +33,9 @@ def get_business_hours(store_id: str, db: Session) -> Dict[int, List[Tuple[time,
             business_hours[day] = []
         business_hours[day].append((record.start_time_local, record.end_time_local))
     
-    # If no business hours, assume 24/7
+
     if not business_hours:
-        # For each day of week, add 00:00 to 23:59:59
+        
         for day in range(7):
             business_hours[day] = [(time(0, 0, 0), time(23, 59, 59))]
     
