@@ -9,7 +9,7 @@ class StoreStatus(Base):
     id = Column(Integer, primary_key=True, index=True)
     store_id = Column(String, index=True)
     timestamp_utc = Column(DateTime, index=True)
-    status = Column(String)  # 'active' or 'inactive'
+    status = Column(String)  
 
 class BusinessHours(Base):
     __tablename__ = "business_hours"
@@ -32,7 +32,7 @@ class Report(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     report_id = Column(String, unique=True, index=True)
-    status = Column(String)  # 'running' or 'complete'
+    status = Column(String)  
     created_at = Column(DateTime)
     completed_at = Column(DateTime, nullable=True)
     file_path = Column(String, nullable=True)

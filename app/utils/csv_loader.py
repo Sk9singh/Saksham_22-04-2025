@@ -62,16 +62,16 @@ def load_store_status(file_path, db: Session):
             timestamp_str = row['timestamp_utc']
             try:
                 if '.' in timestamp_str and ' UTC' in timestamp_str:
-                    # Format: 2023-01-01 12:30:45.123 UTC
+                    
                     timestamp_utc = datetime.strptime(timestamp_str, '%Y-%m-%d %H:%M:%S.%f %Z')
                 elif ' UTC' in timestamp_str:
-                    # Format: 2023-01-01 12:30:45 UTC
+                    
                     timestamp_utc = datetime.strptime(timestamp_str, '%Y-%m-%d %H:%M:%S %Z')
                 else:
-                    # Try a generic format
+                
                     timestamp_utc = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
             except ValueError:
-                # If all else fails, try a basic format
+                
                 try:
                     timestamp_utc = datetime.strptime(timestamp_str.split('.')[0], '%Y-%m-%d %H:%M:%S')
                 except ValueError:
@@ -85,13 +85,13 @@ def load_store_status(file_path, db: Session):
             )
             batch.append(store_status)
             
-            # Commit in batches for better performance
+            
             if len(batch) >= batch_size:
                 db.add_all(batch)
                 db.commit()
                 batch = []
         
-        # Add any remaining records
+        
         if batch:
             db.add_all(batch)
             db.commit()
