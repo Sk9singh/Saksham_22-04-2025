@@ -12,7 +12,7 @@ class ReportStatusResponse(BaseModel):
 
 class StoreUptimeReport(BaseModel):
     store_id: str
-    # Original time measurements
+    
     uptime_last_hour: float  # in minutes
     uptime_last_day: float  # in hours
     uptime_last_week: float  # in hours

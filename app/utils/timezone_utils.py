@@ -29,7 +29,7 @@ def convert_local_to_utc(timestamp_local: datetime, timezone_str: str) -> dateti
     Returns:
         Datetime in UTC
     """
-    # Ensure the timestamp is aware of its timezone
+    
     tz = pytz.timezone(timezone_str)
     if timestamp_local.tzinfo is None:
         timestamp_local = tz.localize(timestamp_local)

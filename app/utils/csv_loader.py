@@ -58,7 +58,7 @@ def load_store_status(file_path, db: Session):
         batch = []
         
         for row in csv_reader:
-            # Convert timestamp string to datetime object
+            
             timestamp_str = row['timestamp_utc']
             try:
                 if '.' in timestamp_str and ' UTC' in timestamp_str:
