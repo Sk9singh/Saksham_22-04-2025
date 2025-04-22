@@ -28,7 +28,7 @@ def trigger_report(background_tasks: BackgroundTasks, db: Session = Depends(get_
     db.add(new_report)
     db.commit()
     
-    # Trigger report generation in the background
+    
     background_tasks.add_task(process_report, report_id, db)
     
     return {"report_id": report_id}
@@ -49,7 +49,7 @@ def get_report(report_id: str, db: Session = Depends(get_db)):
     if report.status == "failed":
         raise HTTPException(status_code=500, detail="Report generation failed")
     
-    # If report is complete, return the CSV file
+    
     if not os.path.exists(report.file_path):
         raise HTTPException(status_code=500, detail="Report file not found")
     
