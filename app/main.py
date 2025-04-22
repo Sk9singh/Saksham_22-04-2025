@@ -5,12 +5,11 @@ from .db import engine, get_db, Base
 from .api.routes import router as api_router
 from .utils.csv_loader import load_all_data
 
-# Create the database tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Store Monitoring API")
 
-# Include API routes
+
 app.include_router(api_router, prefix="/api")
 
 @app.on_event("startup")
@@ -18,13 +17,13 @@ async def startup_event():
     """Load data from CSVs on startup if needed"""
     db = next(get_db())
     try:
-        # Check if data is already loaded
+        
         from .models import StoreStatus
         count = db.query(StoreStatus).count()
         print(f"Found {count} existing store status records")
         
         if count == 0:
-            # Load data from zip file
+            
             zip_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'store-monitoring-data.zip')
             if os.path.exists(zip_path):
                 print(f"Loading data from {zip_path}...")
